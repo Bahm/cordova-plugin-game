@@ -658,6 +658,7 @@ public class GameHelper implements GoogleApiClient.ConnectionCallbacks,
             return;
         }
         // 2016-11-19 [letmaik] after cancelling user initiated login, it was impossible to start again because of this check
+        //                      The underlying reason is that Android never notified us about the sign in cancellation.
         /* else if (mConnecting) {
             logWarn("beginUserInitiatedSignIn() called when already connecting. "
                     + "Be patient! You can only call this method after you get an "
@@ -677,6 +678,9 @@ public class GameHelper implements GoogleApiClient.ConnectionCallbacks,
         mUserInitiatedSignIn = true;
 
         if (mConnectionResult != null) {
+            // 2016-11-19 [letmaik] see above
+            mExpectingResolution = false;
+
             // We have a pending connection result from a previous failure, so
             // start with that.
             debugLog("beginUserInitiatedSignIn: continuing pending sign-in flow.");
