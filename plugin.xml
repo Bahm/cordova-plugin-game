@@ -16,7 +16,7 @@
 	</engines>
  		
     <js-module src="www/game.js" name="game">
-        <clobbers target="window.googlegame" />
+        <clobbers target="window.gameservice" />
     </js-module>
 	
     <!-- android -->
